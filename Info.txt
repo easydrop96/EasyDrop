@@ -1,0 +1,28 @@
+
+- Projekt erstellen:            django-admin startproject EasyDrop
+- cd EasyDrop
+- neu App mit Name posts:       python .\manage.py startapp posts
+- um projekt zu run :           python .\manage.py runserver 
+
+- bei posta "urls" erstellen 
+    - urls schreiben die bei views programmiert
+
+-template File erstellen, wo alle frontend file sind
+    - bei "setting" in TEMPLATES schreib => 'DIRS': [BASE_DIR / 'templates'] um die File zu definieren 
+    - bei "setting" in INSTALLED_APPS schreib => 'posts'
+
+-bei urls in EasyDrop => from django.urls import path, include 
+    - path('', include('posts.urls'))
+
+* jetzt zeigt ein leer webseite und kann man anfangen
+
+- bei models progremmieren calss , die als bachend ist und mit folgenden COde migrate mit datenbank und kannst django admintrienren (http://127.0.0.1:8000/admin/)
+    - python manage.py makemigrations
+    - python manage.py migrate
+
+    - jetzt kann man user erstellen für Admintrienren : python manage.py createsuperuser 
+
+- um Class Post in Admin zu fügen man mus bei "admin"  programmieren
+    - bei admin-seite neu Post erstellen 
+    - bei index.html programmieren um info von datenbank zu bringen und soll name bei view 'posts' gleich bei html
+    
