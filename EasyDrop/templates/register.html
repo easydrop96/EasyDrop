@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet" href="../static/index.css">
+</head>    
+<body class="auth-page">
+    <div class="auth-container">
+        <h1>Registrieren</h1>
+        <p>Erstellen Sie Ihren Account</p>
+
+        {% for message in messages %}
+        <div class="message error">{{ message }}</div>
+        {% endfor %}
+
+        <form method="POST" action="register" class="auth-form" id="registerForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="vorname">Vorname:</label>
+                <input type="text" name="vorname" id="vorname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nachname">Nachname:</label>
+                <input type="text" name="nachname" id="nachname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Benutzername:</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" name="password" id="password" required oninput="checkPasswordRequirements()">
+                <div class="password-requirements" id="passwordRequirements">
+                    <div class="requirement" id="length">Mindestens 8 Zeichen</div>
+                    <div class="requirement" id="uppercase">Mindestens ein Großbuchstabe</div>
+                    <div class="requirement" id="number">Mindestens eine Zahl</div>
+                    <div class="requirement" id="special">Mindestens ein Sonderzeichen</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password2">Passwort bestätigen:</label>
+                <input type="password" name="password2" id="password2" required oninput="checkPasswordMatch()">
+                <div id="passwordMatch" style="font-size: 0.8em; margin-top: 5px;"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrieren</button>
+        </form>
+    </div>
+
+    <script>
+        function checkPasswordRequirements() {
+            const password = document.getElementById('password').value;
+            
+            // Mindestens 8 Zeichen
+            document.getElementById('length').classList.toggle('met', password.length >= 8);
+            
+            // Mindestens ein Großbuchstabe
+            document.getElementById('uppercase').classList.toggle('met', /[A-Z]/.test(password));
+            
+            // Mindestens eine Zahl
+            document.getElementById('number').classList.toggle('met', /[0-9]/.test(password));
+            
+            // Mindestens ein Sonderzeichen
+            document.getElementById('special').classList.toggle('met', /[!@#$%^&*(),.?":{}|<>]/.test(password));
+        }
+        
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const password2 = document.getElementById('password2').value;
+            const matchElement = document.getElementById('passwordMatch');
+            
+            if (password2 === '') {
+                matchElement.textContent = '';
+                matchElement.style.color = '';
+            } else if (password === password2) {
+                matchElement.textContent = '✓ Passwörter stimmen überein';
+                matchElement.style.color = '#28a745';
+            } else {
+                matchElement.textContent = '✗ Passwörter stimmen nicht überein';
+                matchElement.style.color = '#dc3545';
+            }
+        }
+    </script>
+</body>
+</html>
