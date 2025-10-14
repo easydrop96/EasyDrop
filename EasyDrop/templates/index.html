@@ -10,30 +10,41 @@
 </head>
 
 <body>
-    <h1 class="sitename">Clarity
 
-        {% if user.is_authenticated %}
-         hi {{user.username}}
-        {%endif%}
-  
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo-title">
+            <img src="../static/img/logo.png" alt="EasyDrop Logo" class="logo">
+            <h1 class="site-title" >EasyDrop</h1>
+        </div>
 
-      </h1>
-      <p>Test</p>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Upload</a></li>
+                <li><a href="#">Downloads</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">About</a></li>
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </header>
 
+
+        
     {% if user.is_authenticated %}
+    <p class="greeting">Hi {{ user.username }}</p>
+    
 
-      <a class="btn-getstarted" href="logout">Logout</a>
-
-      {%else%}
-
-      <a class="btn-getstarted" href="login">Login</a>
-
-      {%endif %}
-
+    <!-- Blog Posts -->
     <div class="container">
         <div class="blog-container">
-            {% comment %} {% for post in posts %} um lisst von oben nach unten {% endcomment %}
-            {% for post in posts reversed%}
+            {% for post in posts reversed %}
             <div class="post">
                 <div class="post-header">
                     <h2 class="post-title">{{ post.title }}</h2>
@@ -42,10 +53,7 @@
                     </div>
                 </div>
                 <div class="post-body">
-                    <a style ="text-decoration: none; color: black" href="/post/{{post.id}}">
-                        {{ post.body| truncatewords:20 }}
-
-                    </a>
+                    <a href="/post/{{ post.id }}">{{ post.body|truncatewords:20 }}</a>
                 </div>
             </div>
             {% empty %}
@@ -55,6 +63,8 @@
             {% endfor %}
         </div>
     </div>
-    
+
+    {% endif %}
+
 </body>
 </html>
