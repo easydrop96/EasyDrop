@@ -1,0 +1,24 @@
+<div class="app-container">
+  <header class="navbar">
+    <div class="navbar-left">
+      <img src="assets/logo.png" alt="EasyDrop Logo" style="width: 200px;">
+      <a routerLink="/" routerLinkActive="active">
+        <h1>EasyDrop</h1>
+      </a>
+
+    </div>
+    <nav class="navbar-right">
+      <a routerLink="/team" routerLinkActive="active">Team</a>
+      <a routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
+      <a routerLink="/ueber-uns" routerLinkActive="active">Über uns</a>
+      <a routerLink="/leistung" routerLinkActive="active">Leistung</a>
+      <a routerLink="/artikel" routerLinkActive="active">Artikel</a>
+      <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
+      <a *ngIf="isLoggedIn" (click)="logout()" style="cursor: pointer;">Logout</a>
+      <a *ngIf="!isLoggedIn" routerLink="/register" routerLinkActive="active">Registrieren</a>
+    </nav>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

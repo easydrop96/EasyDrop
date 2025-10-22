@@ -1,0 +1,41 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <div class="form-group">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" [(ngModel)]="vorname" name="vorname" required>
+        </div>
+        <div class="form-group">
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="nachname" [(ngModel)]="nachname" name="nachname" required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" [(ngModel)]="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" [(ngModel)]="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="password" name="password" required
+                (input)="checkPasswordRequirements()">
+            <div class="password-requirements" id="passwordRequirements">
+                <div class="requirement" id="length">Mindestens 8 Zeichen</div>
+                <div class="requirement" id="uppercase">Mindestens ein Großbuchstabe</div>
+                <div class="requirement" id="number">Mindestens eine Zahl</div>
+                <div class="requirement" id="special">Mindestens ein Sonderzeichen</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password2">Password bestätigen:</label>
+            <input type="password" id="password2" [(ngModel)]="password2" name="password2" required
+                (input)="checkPasswordMatch()">
+            <div id="passwordMatch" style="font-size: 0.8em; margin-top: 5px;"></div>
+        </div>
+        <button type="submit" [disabled]="!registerForm.form.valid">Register</button>
+    </form>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="success" [innerHTML]="successMessage"></p>
+</div>

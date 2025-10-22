@@ -26,3 +26,27 @@
     - bei admin-seite neu Post erstellen 
     - bei index.html programmieren um info von datenbank zu bringen und soll name bei view 'posts' gleich bei html
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* frontend
+    app.ts
+
+    app.config.ts
+
+    app.routes.ts
+
+    services/api.service.ts
+
+    posts/posts.component.ts
