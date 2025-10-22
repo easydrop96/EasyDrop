@@ -1,0 +1,63 @@
+<div class="order-detail-container" *ngIf="order">
+    <div class="order-header">
+        <h2>{{ order.title }}</h2>
+        <div class="status-controls">
+            <select [value]="order.status" (change)="updateStatus($event)" class="status-select">
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="order-content">
+        <div class="order-info">
+            <div class="info-section">
+                <h3>Order Details</h3>
+                <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+                <p><strong>Created:</strong> {{ order.created_at | date:'medium' }}</p>
+                <p><strong>Status:</strong> <span class="status-badge" [ngClass]="'status-' + order.status">{{
+                        order.status | titlecase }}</span></p>
+            </div>
+
+            <div class="info-section">
+                <h3>Description</h3>
+                <p>{{ order.description }}</p>
+            </div>
+        </div>
+
+        <div class="order-actions">
+            <button (click)="goToChat()" class="btn btn-primary">Open Chat</button>
+        </div>
+    </div>
+
+    <div class="file-upload-section">
+        <h3>Upload Files</h3>
+        <div class="upload-controls">
+            <input type="file" (change)="onFileSelected($event)" #fileInput class="file-input">
+            <button (click)="uploadFile()" [disabled]="!selectedFile" class="btn btn-secondary">
+                Upload File
+            </button>
+        </div>
+        <div *ngIf="uploadProgress > 0" class="progress-bar">
+            <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+            <span class="progress-text">{{ uploadProgress }}%</span>
+        </div>
+    </div>
+
+    <div class="files-section" *ngIf="order.files && order.files.length > 0">
+        <h3>Uploaded Files</h3>
+        <div class="files-list">
+            <div *ngFor="let file of order.files" class="file-item">
+                <a [href]="file.url" target="_blank" class="file-link">
+                    {{ file.name }}
+                </a>
+                <span class="file-date">{{ file.uploaded_at | date:'short' }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loading">
+    Loading order details...
+</div>

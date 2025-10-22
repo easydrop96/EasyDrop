@@ -1,0 +1,37 @@
+<div class="order-list-container">
+    <h2>My Orders</h2>
+
+    <div class="actions">
+        <a routerLink="/orders/create" class="btn btn-primary">Create New Order</a>
+    </div>
+
+    <div *ngIf="loading" class="loading">
+        Loading orders...
+    </div>
+
+    <div *ngIf="!loading && orders.length === 0" class="no-orders">
+        No orders found. <a routerLink="/orders/create">Create your first order</a>
+    </div>
+
+    <div class="orders-grid" *ngIf="!loading && orders.length > 0">
+        <div class="order-card" *ngFor="let order of orders" [ngClass]="getStatusClass(order.status)">
+            <div class="order-header">
+                <h3>{{ order.title }}</h3>
+                <span class="status">{{ order.status | titlecase }}</span>
+            </div>
+
+            <div class="order-body">
+                <p class="description">{{ order.description }}</p>
+                <div class="order-meta">
+                    <span class="created">Created: {{ order.created_at | date:'short' }}</span>
+                    <span class="customer">Customer: {{ order.customer_name }}</span>
+                </div>
+            </div>
+
+            <div class="order-actions">
+                <a [routerLink]="['/orders', order.id]" class="btn btn-secondary">View Details</a>
+                <a [routerLink]="['/chat', order.id]" class="btn btn-info">Chat</a>
+            </div>
+        </div>
+    </div>
+</div>

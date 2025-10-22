@@ -1,0 +1,41 @@
+<div class="order-create-container">
+    <h2>Create New Order</h2>
+
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="order-form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" class="form-control"
+                [class.error]="orderForm.get('title')?.invalid && orderForm.get('title')?.touched">
+            <div class="error-message" *ngIf="orderForm.get('title')?.invalid && orderForm.get('title')?.touched">
+                {{ getErrorMessage('title') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="customer_name">Customer Name</label>
+            <input type="text" id="customer_name" formControlName="customer_name" class="form-control"
+                [class.error]="orderForm.get('customer_name')?.invalid && orderForm.get('customer_name')?.touched">
+            <div class="error-message"
+                *ngIf="orderForm.get('customer_name')?.invalid && orderForm.get('customer_name')?.touched">
+                {{ getErrorMessage('customer_name') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="5"
+                [class.error]="orderForm.get('description')?.invalid && orderForm.get('description')?.touched"></textarea>
+            <div class="error-message"
+                *ngIf="orderForm.get('description')?.invalid && orderForm.get('description')?.touched">
+                {{ getErrorMessage('description') }}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" [disabled]="submitting">
+                {{ submitting ? 'Creating...' : 'Create Order' }}
+            </button>
+            <a routerLink="/orders" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

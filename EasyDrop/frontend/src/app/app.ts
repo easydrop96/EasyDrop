@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,13 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'frontend';
 
+  constructor(private authService: AuthService) { }
+
   get isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+    return this.authService.isLoggedIn();
   }
 
   logout(): void {
-    localStorage.removeItem('user');
-    window.location.reload(); // Reload to update the navbar
+    this.authService.logout();
   }
 }

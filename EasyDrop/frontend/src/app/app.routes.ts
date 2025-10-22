@@ -7,6 +7,10 @@ import { LeistungComponent } from './leistung/leistung.component';
 import { ArtikelComponent } from './artikel/artikel.component';
 import { LoginComponent } from './login/login';
 import { RegisterComponent } from './register/register';
+import { OrderListComponent } from './orders/order-list/order-list';
+import { OrderCreateComponent } from './orders/order-create/order-create';
+import { OrderDetailComponent } from './orders/order-detail/order-detail';
+import { ChatComponent } from './chat/chat/chat';
 
 export const routes: Routes = [
     { path: '', component: PostsComponent },
@@ -18,4 +22,8 @@ export const routes: Routes = [
     { path: 'artikel', component: ArtikelComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'orders', component: OrderListComponent },
+    { path: 'orders/create', component: OrderCreateComponent },
+    { path: 'orders/:id', component: OrderDetailComponent },
+    { path: 'chat/:orderId', component: ChatComponent },
 ];

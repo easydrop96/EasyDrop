@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'posts',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +70,10 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 
@@ -90,6 +95,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'EasyDrop.wsgi.application'
+
+# Channels
+ASGI_APPLICATION = 'EasyDrop.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database

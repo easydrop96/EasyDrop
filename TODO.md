@@ -1,14 +1,27 @@
-# TODO for Authentication Integration
+# TODO for EasyDrop Order Management and Chat System
 
-- [x] Update Django register view in posts/views.py to save first_name and last_name from vorname and nachname.
-- [x] Add API views for login and register in posts/views.py using DRF, returning JSON responses.
-- [x] Update posts/urls.py to include API paths for /api/login/ and /api/register/.
-- [x] Add Login and Register buttons to navbar-right in app.html.
-- [x] Create login.component.ts, login.component.html, login.component.css, login.component.spec.ts.
-- [x] Create register.component.ts, register.component.html, register.component.css, register.component.spec.ts.
-- [x] Update app.routes.ts to add routes for /login and /register.
-- [x] Create auth.service.ts with login and register methods calling Django APIs.
-- [x] Implement login form with username and password fields.
-- [x] Implement register form with vorname, nachname, username, email, password, password2, and client-side validation (8 chars, uppercase, number, special char).
-- [x] Handle authentication state (store token in localStorage, redirect on success).
-- [ ] Test by running Django server and Angular dev server, verify navigation and form submissions.
+- [x] Install backend dependencies: djangorestframework-simplejwt, channels, daphne
+- [x] Update settings.py for JWT authentication and Channels configuration
+- [x] Create new models: Order, Chat, Message with proper relationships
+- [x] Run Django migrations for new models
+- [x] Create serializers for Order, Chat, Message models
+- [x] Create ViewSets for Order, Chat, Message with proper permissions
+- [x] Add JWT token views to views.py
+- [x] Configure Channels consumers for isolated chat rooms
+- [x] Update posts/urls.py to include new API endpoints
+- [x] Update asgi.py for Channels routing
+- [ ] Install frontend dependencies: ngx-socket-io, @angular/material, etc.
+- [ ] Update auth.service.ts for JWT token handling
+- [ ] Create OrderService for order CRUD operations
+- [ ] Create ChatService for chat and message handling
+- [ ] Create FileUploadService for file uploads with progress
+- [ ] Build OrderCreateComponent for creating new orders
+- [ ] Build OrderListComponent for listing user orders
+- [ ] Build OrderDetailComponent for viewing order details
+- [ ] Build ChatComponent for real-time chat interface
+- [ ] Update app.routes.ts to include order management routes
+- [ ] Implement file upload functionality with validation and progress tracking
+- [ ] Implement real-time chat with isolated rooms per order
+- [ ] Style components and ensure responsive design
+- [ ] Test complete isolation between different order chats
+- [ ] Test by running Django server and Angular dev server, verify functionality
